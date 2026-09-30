@@ -4,4 +4,8 @@ WORKDIR /app
 
 COPY . /app
 
-CMD ["sh", "-c", "frankenphp php-server --root /app --listen :${PORT:-80}"]
+RUN docker-php-ext-install mysqli
+
+EXPOSE 80
+
+CMD ["sh", "-c", "frankenphp php-server --root /app --listen 0.0.0.0:${PORT:-80}"]
